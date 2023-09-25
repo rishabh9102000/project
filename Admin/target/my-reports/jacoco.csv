@@ -1,0 +1,16 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Admin,com.cg.Admin.exception,AdminExceptionHandler,57,0,0,0,14,0,4,0,4,0
+Admin,com.cg.Admin.exception,IdNotFoundException,0,4,0,0,0,2,0,1,0,1
+Admin,com.cg.Admin.models,Role,118,0,22,0,4,0,21,0,10,0
+Admin,com.cg.Admin.models,City,127,23,23,1,2,4,20,4,8,4
+Admin,com.cg.Admin.models,CustomException,138,0,24,0,4,0,23,0,11,0
+Admin,com.cg.Admin.models,Movies,132,18,24,0,3,3,21,3,9,3
+Admin,com.cg.Admin.models,Admin,115,0,22,0,3,0,20,0,9,0
+Admin,com.cg.Admin.models,Theatre,164,29,31,1,2,5,25,5,9,5
+Admin,com.cg.Admin.controller,theatreController,30,0,0,0,4,0,4,0,4,0
+Admin,com.cg.Admin.controller,citycontroller,30,0,0,0,4,0,4,0,4,0
+Admin,com.cg.Admin.controller,movieController,30,0,0,0,4,0,4,0,4,0
+Admin,com.cg.Admin,AdminApplication,8,0,0,0,3,0,2,0,2,0
+Admin,com.cg.Admin.config,MySecurityConfig,89,0,0,0,18,0,7,0,7,0
+Admin,com.cg.Admin.services,AdminServicesImpl,234,166,13,5,47,27,14,12,5,12
+Admin,com.cg.Admin.aop,AdminAop,45,0,0,0,10,0,3,0,3,0
