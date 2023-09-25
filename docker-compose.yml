@@ -13,7 +13,7 @@ services:
 
   eureka:
     
-    build: .
+    build: ./eureka-server
     restart: on-failure
    
     ports:
@@ -23,7 +23,7 @@ services:
  	
    gateway:
     
-    build: .
+    build: ./api-gateway
     restart: on-failure
    
     ports:
@@ -35,7 +35,7 @@ services:
   user:
     depends_on:
       - mysqldb
-    build: .
+    build: ./user
     restart: on-failure
     environment:
       - spring.datasource.url=jdbc:mysql://mysqldb:3306/user?createDatabaseIfNotExist=true
@@ -50,7 +50,7 @@ services:
    admin:
     depends_on:
       - mysqldb
-    build: .
+    build: ./Admin
     restart: on-failure
     environment:
       - spring.datasource.url=jdbc:mysql://mysqldb:3306/admin?createDatabaseIfNotExist=true
