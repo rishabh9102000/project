@@ -1,0 +1,37 @@
+package com.cg.category.services;
+
+import com.cg.category.pojos.Category;
+import com.cg.category.repository.CategoryRepo;
+
+public class CategoryServicesImpl implements CategoryServices {
+	private CategoryRepo repo;
+
+	@Override
+	public void addCategory(Category category) {
+		repo.save(category);
+		
+	}
+
+	@Override
+	public void deleteCategory(int id) {
+		// TODO Auto-generated method stub
+		repo.deleteById(id);
+		
+	}
+
+	@Override
+	public void updateCategory(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Category getCategory(int id) {
+		// TODO Auto-generated method stub
+		Category category = repo.findById(id).get();
+		return category;
+		
+		
+	}
+
+}

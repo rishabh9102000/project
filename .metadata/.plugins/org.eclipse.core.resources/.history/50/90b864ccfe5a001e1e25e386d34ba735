@@ -1,0 +1,30 @@
+server:
+ port: 1010
+# servlet:
+#    context-path:/v1/admin
+ 
+
+  
+spring:
+    application:
+        name: Admin
+    jackson:
+        default-property-inclusion: non-null
+
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/admin?createDatabaseIfNotExist=true
+        username: root
+        password: Mrgoh@2000
+
+    jpa:
+        show-sql: false
+        hibernate:
+            ddl-auto: update
+
+#    security:
+#      user:
+#        name: rishabh
+#        
+#        password: rishabh
+      

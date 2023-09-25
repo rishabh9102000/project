@@ -1,0 +1,5 @@
+package com.cg.category.repository;
+
+public interface categoryRepo {
+
+}

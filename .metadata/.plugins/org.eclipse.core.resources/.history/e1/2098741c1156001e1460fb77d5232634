@@ -1,0 +1,5 @@
+package com.cg.orders.exceptionhandler;
+
+public class OrderExceptionHandler {
+
+}

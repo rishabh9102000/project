@@ -1,0 +1,27 @@
+package com.cg.orders.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.cg.orders.pojos.Orders;
+import com.cg.orders.repository.OrderRepository;
+
+@Component
+public class OrderServicesImpl implements OrderServices {
+
+	@Autowired OrderRepository repo;
+	
+	@Override
+	public Orders addOrder(Orders order) {
+		// TODO Auto-generated method stub
+		
+		return repo.save(order);
+	}
+
+	@Override
+	public Orders getOrder(int id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id).get();
+	}
+
+}

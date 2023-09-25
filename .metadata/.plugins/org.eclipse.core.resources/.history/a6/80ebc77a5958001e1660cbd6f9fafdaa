@@ -1,0 +1,14 @@
+package practice;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class pp {
+	public static void main(String [] args) {
+		List<Integer> l = new ArrayList<Integer>();
+		l.add(1);
+		l.add(2);
+		System.out.println(l.indexOf(1));
+	}
+
+}

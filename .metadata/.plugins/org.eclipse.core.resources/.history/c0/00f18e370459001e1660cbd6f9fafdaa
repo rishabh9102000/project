@@ -1,0 +1,5 @@
+package com.cg.user.repo;
+
+public interface BookingRepo {
+
+}

@@ -1,0 +1,39 @@
+server:
+ port: 1000
+ servlet:
+    context-path: /admin
+ 
+
+  
+spring:
+    application:
+        name: Admin
+    jackson:
+        default-property-inclusion: non-null
+
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/admin?createDatabaseIfNotExist=true
+        username: root
+        password: Mrgoh@2000
+
+    jpa:
+        show-sql: false
+        hibernate:
+            ddl-auto: update
+            
+eureka:
+  client:
+    service-url:
+      default-Zone:  http://localhost:8761/eureka
+
+
+
+
+
+#    security:
+#      user:
+#        name: rishabh
+#        
+#        password: rishabh
+      

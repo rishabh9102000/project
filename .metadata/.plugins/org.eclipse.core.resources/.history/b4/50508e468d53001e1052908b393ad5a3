@@ -1,0 +1,85 @@
+package com.cg.IntPayAPI;
+
+
+import java.util.Optional;
+import org.junit.jupiter.api.extension.ExtendWith;
+import lombok.extern.slf4j.Slf4j;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import com.cg.exceptions.idNotFoundException;
+import com.cg.pojos.OBTransactionIndividualStatus1Code;
+import com.cg.pojos.OBWriteDataInternationalDTO;
+import com.cg.repository.IntPayAPIRepository;
+import com.cg.repository.OBInternationalPaymentConsentRepository;
+import com.cg.service.IntPayAPIservice;
+import com.cg.service.IntPayAPIserviceImpl;
+
+@ExtendWith(MockitoExtension.class)
+
+public class InternationalPaymentsServiceTests {
+	
+	@InjectMocks IntPayAPIservice service = new IntPayAPIserviceImpl();
+
+    @Mock
+    IntPayAPIRepository intPayAPIRepository;
+
+//    @Mock
+//    OBInternationalPaymentConsentRepository consentRepository;
+    
+    //name
+    @Test
+    void testGetInternationalPaymentSuccess() {
+        var paymentId = "1";
+
+        when(intPayAPIRepository.findById(paymentId)).thenReturn(Optional.empty());
+        var exception = assertThrows(idNotFoundException.class, () -> service.getInternationalPayments(paymentId));
+
+        assertEquals(exception.getMessage(), "International Payment Id not found");
+        verify(intPayAPIRepository, times(1)).findById(paymentId);
+    }
+
+
+
+//    @Test
+//    void testGetInternationalPayment() {
+//        var paymentId = "1";
+//
+//        when(intPayAPIRepository.findById(paymentId)).thenReturn(Optional.empty());
+//        var exception = assertThrows(idNotFoundException.class, () -> service.getInternationalPayments(paymentId));
+//
+//        assertEquals(exception.getMessage(), "International Payment Id not found");
+//        verify(intPayAPIRepository, times(1)).findById(paymentId);
+//    }
+
+    @Test
+    void testGetInternationalPaymentDetailsSuccess() throws idNotFoundException {
+        var paymentId = "1";
+
+        var data = OBWriteDataInternationalDTO.builder().InternationalPaymentId(paymentId).status(OBTransactionIndividualStatus1Code.Pending).build();
+
+        when(intPayAPIRepository.findById(paymentId)).thenReturn(Optional.of(data));
+
+        var response = service.getInternationalPaymentsDetail(paymentId);
+        assertAll("payment status",
+                () -> {
+                    assertThat(response.getData().getPaymentStatus().size(), is(equalTo(1)));
+                    var status = response.getData().getPaymentStatus().get(0);
+                    assertThat(status.getStatus(), is(equalTo(OBTransactionIndividualStatus1Code.Pending)));
+                }
+        );
+
+        verify(intPayAPIRepository, times(1)).findById(paymentId);
+    }
+
+
+
+}

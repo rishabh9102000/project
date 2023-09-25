@@ -1,0 +1,59 @@
+package com.cg.orders.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import com.cg.orders.Dto.IngredientsDto;
+import com.cg.orders.Dto.ProductDto;
+import com.cg.orders.Dto.categoryDto;
+import com.cg.orders.exceptions.IngredientFinishedException;
+import com.cg.orders.pojos.Orders;
+import com.cg.orders.repository.OrderRepository;
+
+@Component
+public class OrderServicesImpl implements OrderServices {
+	@Autowired RestTemplate restTemplate;
+	@Autowired OrderRepository repo;
+	
+	@Override
+	public Orders addOrder(Orders order) throws IngredientFinishedException {
+		// TODO Auto-generated method stub
+		//if(!checkAvailibility(order.getProductId())) {throw new IngredientFinishedException("Ingredient out of stock");}
+		//ProductDto prod = getProducts(order.getProductId());
+		
+		
+		return repo.save(order);
+	}
+
+	@Override
+	public Orders getOrder(int id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id).get();
+	}
+	@Override
+	 public ProductDto getProducts(int productId) {
+		 return restTemplate.getForEntity("http://localhost:9991/inventory/getProduct/"+productId, ProductDto.class).getBody();
+	 }
+//	 public boolean checkAvailibility(int productId)  {
+////		List<String> ingredients = restTemplate.getForEntity("http://localhost:9991/inventory/product/"+productId, ProductDto.class).getBody().getIngredients();
+//		 List<Integer> ingredients = getProducts(productId).getIngredients();
+//		 for(Integer ele : ingredients) {
+//			 IngredientsDto quant = restTemplate.getForEntity("http://localhost:9991/inventory/ingredient/"+ ele, IngredientsDto.class).getBody();
+//			 int quantity = quant.getQuantity();
+//			 if (quantity == 0) {
+//				 return false;
+//			 }
+//		 }
+//		 return true;
+//		
+//	 }
+	@Override
+	 public categoryDto checkCategory(int categoryId) {
+		 return restTemplate.getForEntity("http://localhost:9993/inventory/getCategory/"+categoryId, categoryDto.class).getBody();
+	 }
+	
+
+}

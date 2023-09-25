@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AdminApplicationTests" project="Admin" tests="10" started="10" failures="0" errors="0" ignored="0">
+  <testsuite name="com.cg.Admin.AdminApplicationTests" time="4.428" displayname="AdminApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]">
+    <testcase name="addcity" classname="com.cg.Admin.AdminApplicationTests" time="4.286" displayname="addcity()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:addcity()]"/>
+    <testcase name="testGetTheatre" classname="com.cg.Admin.AdminApplicationTests" time="0.016" displayname="testGetTheatre()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:testGetTheatre()]"/>
+    <testcase name="testRemoveMovie" classname="com.cg.Admin.AdminApplicationTests" time="0.014" displayname="testRemoveMovie()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:testRemoveMovie()]"/>
+    <testcase name="testGetCity" classname="com.cg.Admin.AdminApplicationTests" time="0.012" displayname="testGetCity()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:testGetCity()]"/>
+    <testcase name="testRemoveCity" classname="com.cg.Admin.AdminApplicationTests" time="0.01" displayname="testRemoveCity()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:testRemoveCity()]"/>
+    <testcase name="testGetMovies" classname="com.cg.Admin.AdminApplicationTests" time="0.013" displayname="testGetMovies()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:testGetMovies()]"/>
+    <testcase name="addTheaterTest" classname="com.cg.Admin.AdminApplicationTests" time="0.01" displayname="addTheaterTest()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:addTheaterTest()]"/>
+    <testcase name="testRemoveTheatre" classname="com.cg.Admin.AdminApplicationTests" time="0.013" displayname="testRemoveTheatre()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:testRemoveTheatre()]"/>
+    <testcase name="testGetTheatreException" classname="com.cg.Admin.AdminApplicationTests" time="0.016" displayname="testGetTheatreException()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:testGetTheatreException()]"/>
+    <testcase name="getMoviesTestException" classname="com.cg.Admin.AdminApplicationTests" time="0.015" displayname="getMoviesTestException()" uniqueid="[engine:junit-jupiter]/[class:com.cg.Admin.AdminApplicationTests]/[method:getMoviesTestException()]"/>
+  </testsuite>
+</testrun>

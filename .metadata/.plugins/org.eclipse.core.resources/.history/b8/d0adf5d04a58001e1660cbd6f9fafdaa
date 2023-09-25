@@ -1,0 +1,59 @@
+package com.cg.Admin.services;
+
+import org.hibernate.mapping.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.cg.Admin.exception.IdNotFoundException;
+import com.cg.Admin.models.City;
+import com.cg.Admin.models.Movies;
+import com.cg.Admin.models.Theatre;
+import com.cg.Admin.repo.CityRepo;
+import com.cg.Admin.repo.MoviesRepo;
+import com.cg.Admin.repo.TheatreRepo;
+
+@Component
+public class AdminServicesImpl implements AdminServices{
+	@Autowired CityRepo cityrepo;
+	@Autowired MoviesRepo moviesrepo;
+	@Autowired TheatreRepo theatrerepo;
+	
+	@Override
+	public City addCity(City city) {
+		return cityrepo.save(city);
+	}
+
+	@Override
+	public String removeCity(int cityId) throws IdNotFoundException {
+		City city = cityrepo.findById(cityId).orElseThrow(()-> new IdNotFoundException("invalid ID" + cityId));
+		cityrepo.delete(city);
+		return "succesfully deleted";
+	}
+
+	@Override
+	public Theatre addTheatre(Theatre theatre) {
+		return theatrerepo.save(theatre);
+	}
+
+	@Override
+	public Movies addMovies(Movies movie) {
+		return moviesrepo.save(movie);
+	}
+
+	@Override
+	public String removeTheatre(int theatreId) throws IdNotFoundException {
+		Theatre theatre = theatrerepo.findById(theatreId).orElseThrow(()-> new IdNotFoundException("Id not Found" + theatreId));
+		theatrerepo.delete(theatre);
+		return "succesfully deleted";
+		
+	}
+
+	@Override
+	public String removeMovies(int movieId) throws IdNotFoundException {
+		Movies movie = moviesrepo.findById(movieId).orElseThrow(()-> new IdNotFoundException("Id not Found" + movieId));
+		List<Integer> theatre =movie.getTheatreId();
+		moviesrepo.delete(movie);
+		return "succesfully deleted";
+	}
+
+}

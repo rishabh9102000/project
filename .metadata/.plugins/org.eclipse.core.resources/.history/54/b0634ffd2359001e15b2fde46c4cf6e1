@@ -1,0 +1,136 @@
+
+package com.cg.Admin.services;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.cg.Admin.exception.IdNotFoundException;
+import com.cg.Admin.models.City;
+import com.cg.Admin.models.Movies;
+import com.cg.Admin.models.Theatre;
+import com.cg.Admin.repo.CityRepo;
+import com.cg.Admin.repo.MoviesRepo;
+import com.cg.Admin.repo.TheatreRepo;
+
+@Component
+public class AdminServicesImpl implements AdminServices{
+	@Autowired CityRepo cityrepo;
+	@Autowired MoviesRepo moviesrepo;
+	@Autowired TheatreRepo theatrerepo;
+	
+	@Override
+	public City addCity(City city) throws IdNotFoundException {
+		cityrepo.save(city);
+		List<Integer> theatreList = city.getTheatres();
+		for(Integer i : theatreList) {
+			Theatre theatre = getTheatre(i);
+			List<Integer> cityList = theatre.getCity();
+			cityList.add(city.getCityId());
+			theatrerepo.save(theatre);
+		}
+		return cityrepo.save(city);
+	}
+
+	@Override
+	public String removeCity(int cityId) throws IdNotFoundException {
+		City city = cityrepo.findById(cityId).orElseThrow(()-> new IdNotFoundException("invalid ID" + cityId));
+		cityrepo.delete(city);
+		return "succesfully deleted";
+	}
+
+	@Override
+	public Theatre addTheatre(Theatre theatre) throws IdNotFoundException {
+		theatrerepo.save(theatre);
+		List<Integer> movieList = theatre.getMovies();
+		for(Integer i : movieList) {
+			Movies movie = getMovie(i);
+			List<Integer> theatreIdList = movie.getTheatreId();
+			theatreIdList.add(theatre.getTheatreId());
+			moviesrepo.save(movie);
+		}
+		return theatrerepo.save(theatre);
+	}
+
+	@Override
+	public Movies addMovies(Movies movie) throws IdNotFoundException {
+		moviesrepo.save(movie);
+		Movies movieo = moviesrepo.findById(movie.getMovieId()).orElseThrow(()-> new IdNotFoundException("Id not Found" + movie.getMovieId()));
+		List<Integer> theatres = movie.getTheatreId();
+		for(Integer i : theatres) {
+			System.out.println(i);
+			Theatre th = getTheatre(i);
+			List<Integer> movieIdList = th.getMovies();
+			movieIdList.add(movie.getMovieId());
+			th.setMovies(movieIdList);
+			theatrerepo.save(th);
+			
+		}
+		return movieo;
+			
+	}
+
+	@Override
+	public String removeTheatre(int theatreId) throws IdNotFoundException {
+		Theatre theatre = theatrerepo.findById(theatreId).orElseThrow(()-> new IdNotFoundException("Id not Found" + theatreId));
+		List<Integer> movieList = theatre.getMovies();
+		for(Integer i : movieList) {
+			Movies movie = getMovie(i);
+			List<Integer> theatreIdList = movie.getTheatreId();
+			if(theatreIdList.indexOf(theatreId) == -1) {
+				continue;
+			}
+			theatreIdList.remove(theatreIdList.indexOf(theatreId));
+			moviesrepo.save(movie);
+		}
+		List<Integer> cityList = theatre.getCity();
+		for(Integer i : cityList) {
+			City city = getCity(i);
+			List<Integer> thidlist = city.getTheatres();
+			if(thidlist.indexOf(theatreId)==-1) {
+				continue;
+			}
+			thidlist.remove(thidlist.indexOf(theatreId));
+			cityrepo.save(city);
+		}
+		theatrerepo.delete(theatre);
+		return "succesfully deleted";
+		
+	}
+
+	@Override
+	public String removeMovies(int movieId) throws IdNotFoundException {
+		Movies movie = moviesrepo.findById(movieId).orElseThrow(()-> new IdNotFoundException("Id not Found" + movieId));
+		List<Integer> theatres = movie.getTheatreId();
+		for(Integer i : theatres) {
+			System.out.println(i);
+			Theatre th = getTheatre(i);
+			List<Integer> movieIdList = th.getMovies();
+			int j =movieIdList.indexOf(movieId);
+			if(j == -1) {
+				continue;
+			}
+			System.out.println(j);
+			movieIdList.remove(j);
+		
+			th.setMovies(movieIdList);
+			theatrerepo.save(th);
+			System.out.println(th);
+			
+		}
+		moviesrepo.delete(movie);
+		return "succesfully deleted";
+	}
+	public Theatre getTheatre(int theatreId) throws IdNotFoundException{
+		return theatrerepo.findById(theatreId).orElseThrow(()-> new IdNotFoundException("Id notFound : " + theatreId));
+	}
+	public City getCity(int cityId) throws IdNotFoundException{
+		return cityrepo.findById(cityId).orElseThrow(()-> new IdNotFoundException("Id not found : "+  cityId));
+	}
+	public Movies getMovie(int movieId) throws IdNotFoundException{
+		return moviesrepo.findById(movieId).orElseThrow(()-> new IdNotFoundException("Id not found : " + movieId));
+	}
+
+}

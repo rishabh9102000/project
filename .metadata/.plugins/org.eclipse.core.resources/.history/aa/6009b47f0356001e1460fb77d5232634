@@ -1,0 +1,5 @@
+package com.cg.orders.Dto;
+
+public class ProductDto {
+
+}

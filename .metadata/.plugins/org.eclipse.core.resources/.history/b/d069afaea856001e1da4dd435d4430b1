@@ -1,0 +1,11 @@
+package com.cg.orders.services;
+
+import com.cg.orders.exceptions.IngredientFinishedException;
+import com.cg.orders.pojos.Orders;
+
+public interface OrderServices {
+	public Orders addOrder(Orders order) throws IngredientFinishedException;
+	public Orders getOrder(int id);
+	
+
+}

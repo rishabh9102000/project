@@ -1,0 +1,33 @@
+package com.cg.category.services;
+
+import com.cg.category.repository.categoryRepo;
+
+public class categoryServicesImpl implements categoryServices {
+	private categoryRepo repo;
+
+	@Override
+	public void addCategory(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteCategory(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCategory(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getCategory() {
+		// TODO Auto-generated method stub
+		List<>repo.findAll()
+		
+	}
+
+}

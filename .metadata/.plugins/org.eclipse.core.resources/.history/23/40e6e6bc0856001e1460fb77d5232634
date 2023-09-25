@@ -1,0 +1,5 @@
+package com.cg.products.DTO;
+
+public class IngredientsDto {
+
+}

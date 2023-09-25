@@ -1,0 +1,5 @@
+package com.cg.orders.services;
+
+public interface OrderServices {
+
+}

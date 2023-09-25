@@ -1,0 +1,32 @@
+package com.cg.user.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import com.cg.orders.Dto.ProductDto;
+import com.cg.user.dto.CityDto;
+import com.cg.user.model.Booking;
+
+@Component
+public class UserServiceImpl implements UserService{
+	@Autowired RestTemplate restTemplate;
+	@Override
+	public Booking addBooking(int bookingId, int cityId, int theatreId, int movieId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Integer> getAllTheatres(int cityId) {
+		CityDto city = getCity(cityId);
+		
+		return city.getTheatres();
+	}
+	public CityDto getCity(int cityId) {
+		 return restTemplate.getForEntity("http://localhost:1001/city/"+ cityId, CityDto.class).getBody();
+	}
+
+}

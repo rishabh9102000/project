@@ -1,0 +1,37 @@
+package com.cg.products.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.cg.products.pojo.Products;
+import com.cg.products.repository.ProductRepository;
+
+@Component
+public class ProductServiceImpl implements ProductServices {
+	@Autowired ProductRepository repo;
+	@Override
+	public Products addProduct(Products product) {
+		
+		return repo.save(product);
+	}
+
+	@Override
+	public Products getProduct(int id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id).get();
+	}
+
+	@Override
+	public String deleteProduct(int id) {
+		// TODO Auto-generated method stub
+		repo.deleteById(id);
+		return "deleted";
+	}
+
+	@Override
+	public Products updateProduct(int id, String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

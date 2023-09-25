@@ -1,0 +1,9 @@
+package com.cg.category.services;
+
+public interface categoryServices {
+	public void addCategory(String name);
+	public void deleteCategory(int id);
+	public void updateCategory(int id);
+	public void getCategory();
+
+}

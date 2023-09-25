@@ -1,0 +1,79 @@
+package com.cg.user.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
+
+
+import com.cg.user.dto.CityDto;
+import com.cg.user.dto.MoviesDto;
+import com.cg.user.dto.TheatreDto;
+import com.cg.user.exceptions.IdNotFoundException;
+import com.cg.user.model.Booking;
+import com.cg.user.repo.BookingRepo;
+
+@Component
+public class UserServiceImpl implements UserService{
+	@Autowired BookingRepo repo;
+	@Autowired RestTemplate restTemplate;
+	@Override
+	public Booking addBooking( int cityId, int theatreId, int movieId) throws IdNotFoundException {
+		Booking booking = new Booking();
+		MoviesDto movie = getMovie(movieId);
+		CityDto city = getCity(cityId);
+		TheatreDto theatre = getTheatre(theatreId);
+		booking.setCityName(city.getCityName());
+		booking.setMovieName(movie.getMovieName());
+		booking.setTheatreName(theatre.getTheatreName());
+		
+		return repo.save(booking);
+	}
+
+	@Override
+	public List<Integer> getAllTheatres(int cityId) throws IdNotFoundException {
+		CityDto city = getCity(cityId);
+		
+		return city.getTheatres();
+	}
+	public CityDto getCity(int cityId) throws IdNotFoundException {
+		try {
+		return restTemplate.getForEntity("http://localhost:1001/city/"+ cityId, CityDto.class).getBody();
+		}
+		catch(HttpClientErrorException e) {
+			throw new  IdNotFoundException("Id not Found");
+		}
+		
+	}
+	public TheatreDto getTheatre(int theatreId) throws IdNotFoundException{
+		try { 
+		return restTemplate.getForEntity("http://localhost:1001/theatre/"+ theatreId, TheatreDto.class).getBody();
+		}
+		catch(HttpClientErrorException e) {
+			throw new  IdNotFoundException("Id not Found");
+		}
+		
+	}
+	public MoviesDto getMovie(int movieId) throws IdNotFoundException {
+		try {
+		return restTemplate.getForEntity("http://localhost:1001/movie/"+ movieId, MoviesDto.class).getBody();}
+		catch(HttpClientErrorException e) {
+			throw new  IdNotFoundException("Id not Found");
+		}
+	}
+
+	@Override
+	public List<Integer> getAllMovies(int theatreId) throws IdNotFoundException {
+		TheatreDto theatre = getTheatre(theatreId);
+		return theatre.getMovies();
+	}
+
+	@Override
+	public Booking getBooking(int bookingId) throws IdNotFoundException {
+		
+		return repo.findById(bookingId).orElseThrow(()-> new IdNotFoundException("Id not found : " + bookingId));
+	}
+
+}

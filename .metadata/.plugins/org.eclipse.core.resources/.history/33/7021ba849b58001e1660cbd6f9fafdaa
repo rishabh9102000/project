@@ -1,0 +1,5 @@
+package com.cg.Admin.aop;
+
+public class AdminAop {
+
+}

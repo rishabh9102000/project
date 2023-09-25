@@ -1,0 +1,5 @@
+package com.cg.orders.exceptions;
+
+public class IdNotFoundException {
+
+}

@@ -1,0 +1,5 @@
+package com.cg.orders.aspect;
+
+public class OrderAspect {
+
+}

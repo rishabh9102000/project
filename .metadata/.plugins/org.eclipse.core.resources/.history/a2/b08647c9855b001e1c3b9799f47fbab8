@@ -1,0 +1,17 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: API-GATEWAY-SERVICE
+  cloud:
+    gateway:
+      routes:
+        - id: Admin-SERVICE
+          uri: http://localhost:1000
+          predicates:
+            - Path=/admin/**
+
+eureka:
+  client:
+    service-url:
+      default-Zone:  http://localhost:8761/eureka

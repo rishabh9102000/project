@@ -1,0 +1,5 @@
+package com.cg.Admin.models;
+
+public class Role {
+
+}

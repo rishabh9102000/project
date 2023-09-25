@@ -1,0 +1,29 @@
+package com.cg.orders.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cg.orders.exceptions.IngredientFinishedException;
+import com.cg.orders.pojos.Orders;
+import com.cg.orders.services.OrderServices;
+
+@RestController
+public class OrderController {
+	@Autowired OrderServices services;
+	
+	@PostMapping(value = "/addOrder", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Orders> addOrder(@RequestBody Orders order) throws IngredientFinishedException{
+		return new ResponseEntity<Orders>(services.addOrder(order),HttpStatus.OK);
+	}
+	@GetMapping(value="/getOrder/{id}")
+	public ResponseEntity<Orders> getOrder(@PathVariable int id) {
+		return new ResponseEntity<Orders>(services.getOrder(id), HttpStatus.OK);
+	}
+}

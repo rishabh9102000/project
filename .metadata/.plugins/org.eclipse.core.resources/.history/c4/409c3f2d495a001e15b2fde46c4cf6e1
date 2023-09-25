@@ -1,0 +1,5 @@
+package com.cg.Admin.config;
+
+public class MySecurityConfig {
+
+}

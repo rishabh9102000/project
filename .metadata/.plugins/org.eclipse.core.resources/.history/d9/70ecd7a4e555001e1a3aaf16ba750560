@@ -1,0 +1,11 @@
+package com.cg.category.services;
+
+import com.cg.category.pojos.Category;
+
+public interface CategoryServices {
+	public void addCategory(Category category);
+	public void deleteCategory(int id);
+	public void updateCategory(int id,String names);
+	public Category getCategory(int id);
+
+}

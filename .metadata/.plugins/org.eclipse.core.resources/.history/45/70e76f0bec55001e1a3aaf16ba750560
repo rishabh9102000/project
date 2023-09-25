@@ -1,0 +1,8 @@
+package com.cg.ingredients.repo;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface IngredientRepo extends JpaRepository<Ingredients,String> {
+
+}

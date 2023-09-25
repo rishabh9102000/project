@@ -1,0 +1,15 @@
+package com.cg.user.services;
+
+import java.util.List;
+
+import com.cg.user.dto.CityDto;
+import com.cg.user.model.Booking;
+
+public interface UserService {
+	public Booking addBooking(int cityId,int theatreId,int movieId);
+	public Booking getBooking(int bookingId);
+	public List<Integer> getAllTheatres(int cityId);
+	public List<Integer> getAllMovies(int theatreId);
+	
+
+}

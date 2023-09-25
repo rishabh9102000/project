@@ -1,0 +1,5 @@
+package com.cg.user.aspect;
+
+public class UserAop {
+
+}

@@ -1,0 +1,24 @@
+package com.cg.user.exceptions;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.cg.user.model.CustomException;
+
+
+
+@ControllerAdvice
+public class UserExceptionHandler {
+	@ResponseBody
+	 @ExceptionHandler(IdNotFoundException.class)
+	    public ResponseEntity<CustomException> handleidNotFoundException(IdNotFoundException except){
+		 	CustomException custom = new CustomException();
+		 	custom.setUserMessage(except.getMessage());
+		 	custom.setDeveloperMessage(except.getLocalizedMessage());
+		 	custom.setStatusCode(404);
+	        return new ResponseEntity<CustomException>(custom, HttpStatus.NOT_FOUND);
+	    }
+}
