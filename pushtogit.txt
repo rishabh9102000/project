@@ -1,0 +1,10 @@
+git init .
+
+git remote add origin https://github.com/rishabh9102000/project.git<path of repo>
+
+git add .
+
+git commit -m "first commit"
+
+git push -f origin master
+

@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3'
 services:
   mysqldb:
     image: mysql
@@ -12,25 +12,20 @@ services:
 
 
   eureka:
-    
     build: ./eureka-server
     restart: on-failure
-   
     ports:
       - 8761:8761
     networks:
       - mynetwork
  	
-   gateway:
-    
+  gateway:
     build: ./api-gateway
     restart: on-failure
-   
     ports:
       - 8085:8085
     networks:
       - mynetwork
-
 
   user:
     depends_on:
@@ -46,7 +41,6 @@ services:
     networks:
       - mynetwork
 
-
    admin:
     depends_on:
       - mysqldb
@@ -60,11 +54,6 @@ services:
       - 1000:1000
     networks:
       - mynetwork
-
-
-   
-
- 
 
 networks:
   mynetwork:
